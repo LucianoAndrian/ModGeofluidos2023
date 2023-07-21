@@ -3,9 +3,6 @@ PROGRAM ascii2nc
 ! organiza todas las variables en un array de 3 dimensiones
 ! escribe las variables por separado en archivos .nc
 
-! la funcion nombre devuelve en char pero en el archivo se ve cualquier cosa
-! la funcion nivel funciona bien
-
 ! compilar con gfortran 30_ascii2nc.f90 -L/usr/lib/x86_64-linux-gnu/ -lnetcdf -lnetcdff -I/usr/include/ -o ascii2nc
 
   USE netcdf
