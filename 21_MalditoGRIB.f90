@@ -63,15 +63,53 @@ CHARACTER(20) FUNCTION nombre(character_vector)
   INTEGER                       :: code
   
   code = character_vector(8)
-
+  ! copy paste robado
   SELECT CASE(code)
-  CASE(168)
-    nombre = 'tas'
-  CASE(131)
-    nombre = 'ua'
-  END SELECT
-  
-  RETURN
+    CASE(34)
+      nombre = "sst"
+    CASE(39)
+      nombre = "wsoil1"
+    CASE(40)
+      nombre = "wsoil2"
+    CASE(41)
+      nombre = "wsoil3"
+    CASE(42)
+      nombre = "wsoil4"
+    CASE(129)
+      nombre = "zg"
+    CASE(130)
+      nombre = "ta"
+    CASE(131)
+      nombre = "ua"
+    CASE(132)
+      nombre = "va"
+    CASE(134)
+      nombre = "ps"
+    CASE(139)
+      nombre = "tsoil1"
+    CASE(151)
+      nombre = "mslp"
+    CASE(157)
+      nombre = "hur"
+    CASE(165)
+      nombre = "uas"
+    CASE(166)
+      nombre = "vas"
+    CASE(168)
+      nombre = "tas"
+    CASE(170)
+      nombre = "tsoil2"
+    CASE(183)
+      nombre = "tsoil3"
+    CASE(228)
+      nombre = "pr"
+    CASE(235)
+      nombre = "tsk"
+    CASE(236)
+      nombre = "tsoil4"
+      
+    END SELECT
+    
 
 END FUNCTION nombre
 
@@ -86,10 +124,15 @@ CHARACTER(20) FUNCTION nivel(character_vector)
   code = character_vector(9)
 
   SELECT CASE(code)
-  CASE(1)
-    nivel = 'surface'
-  CASE(5)
-    nivel = 'eta'
+    CASE(1)
+      tipo_de_nivel = "surface"
+    CASE(3)
+      tipo_de_nivel = "pressure"
+    CASE(4)
+      tipo_de_nivel = "depth"
+    CASE(5)
+      tipo_de_nivel = "eta"
+
   END SELECT
   
   RETURN
