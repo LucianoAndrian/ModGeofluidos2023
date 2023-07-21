@@ -53,12 +53,12 @@ PROGRAM ascii2nc
     ! ejemplo, linea 101 salteada -> do de 1 a 99
     ! en cada ciclo de ** guarda en una dimencion diferente de la matriz
     DO y=1,99
-     READ(9, *) datos(y,:,z)
+     READ(9, *) datos(:,y,z)
     END DO
   END DO ! cierra **
   CLOSE(9)  
 
-  ! <<<<<< salida E21 >>>>>>
+  !<<<<<< salida E21 >>>>>>
   !DO z=1,3
   !  PRINT *, nombre(ch_vector(:,z)), ch_vector(1,z), '/', ch_vector(2,z), '/', &
   !         ch_vector(3,z), ch_vector(4,z), 'en ', nivel(ch_vector(:,z)), ch_vector(10,z) 
@@ -95,7 +95,7 @@ PROGRAM ascii2nc
   long_var_name = 'Eastward air wind speed'
   dz = 1
   CALL tonetcdf(idfile, datos(:,:,3), file_name, var_name, &
-                standard_var_name, long_var_name,dz, level, units)  
+                standard_var_name, long_var_name, dz, level, units)  
   nccode = nf90_close(idfile)
   PRINT *, 'save to netcdf ', var_name
 
@@ -104,13 +104,13 @@ END PROGRAM ascii2nc
 
 
 SUBROUTINE tonetcdf(idfile, datos, file_name, var_name, & 
-                    standard_var_name, long_var_name,dz, level, units)
+                    standard_var_name, long_var_name, dz, level, units)
 ! crea archivo .nc                    
   USE netcdf
-    INTEGER, INTENT(in)                             :: dz
-  REAL, DIMENSION(99,99,dz), INTENT(in) :: datos
+  INTEGER, INTENT(in)                             :: dz
+  REAL, DIMENSION(99,99,dz), INTENT(in)           :: datos
   CHARACTER(99), INTENT(in)                       :: file_name, var_name, level, units
-  CHARACTER(99) , INTENT(in)                       :: standard_var_name, long_var_name
+  CHARACTER(99) , INTENT(in)                      :: standard_var_name, long_var_name
 
   INTEGER, INTENT(out)                            :: idfile
   
@@ -161,7 +161,7 @@ SUBROUTINE tonetcdf(idfile, datos, file_name, var_name, &
   nccode = nf90_put_var(idfile, idtime_var, time_var)  
   nccode = nf90_put_var(idfile, idlon_var, lon_var)
   nccode = nf90_put_var(idfile, idlat_var, lat_var)  
-  nccode = nf90_put_var(idfile, idvar_field, datos(:,:,dz))
+  nccode = nf90_put_var(idfile, idvar_field, datos(:,:,1:dz))
   
   nccode = nf90_close(idfile) 
 
